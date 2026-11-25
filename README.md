@@ -12,6 +12,36 @@ uses MySQL to store employee records, tasks, assignments, and comments.
 - Let employees view assigned tasks, update task status, and add comments
 - View task assignments, comments, employee profiles, and completed tasks
 
+## Project explanation
+
+This project is a text-based application: users interact with it by choosing
+numbered options in the terminal. The program connects to MySQL when it starts,
+then keeps showing the main menu until the user chooses **Exit**.
+
+The application has two kinds of users:
+
+- **Admin:** Signs in with a username and password. Admins can add, view, search,
+  update, and delete employee and task records. They can also assign tasks to
+  employees and view assignments and comments.
+- **Employee:** Signs in with an employee ID. Employees can view tasks assigned
+  to them, see task details, change a task's status, leave comments, view their
+  completed tasks, and view their employee profile.
+
+The database separates the main kinds of information into tables:
+
+- `users` stores admin login accounts.
+- `employees` stores employee IDs and profile details.
+- `tasks` stores task descriptions, priority, due date, and status.
+- `assigned_tasks` connects employees with tasks and records when a task was
+  assigned.
+- `comments` stores employee comments linked to a task and an employee.
+
+For example, assigning a task creates a row in `assigned_tasks`; it does not
+copy the task details into the employee record. When an employee views their
+tasks, the program joins the assignment and task tables and filters by that
+employee's ID. Changes made through the menus are saved to MySQL with
+`commit()`.
+
 ## Requirements
 
 - Python 3
@@ -98,10 +128,10 @@ uses MySQL to store employee records, tasks, assignments, and comments.
 
 ## First use
 
-Choose **Admin Login**. If there is no admin account yet, the application
-offers to register one. After registration, use that username and password to
-log in. An admin can add employee records; employees log in using their
-employee ID.
+Choose **Admin Login** and enter a username and password. If that username is
+not already registered, the application offers to create an admin account.
+After signing in, use employee management to add employee records. Employees
+can then sign in using their employee ID.
 
 ## Security note
 
